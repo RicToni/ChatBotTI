@@ -8,5 +8,8 @@
     ".": "node index.js"
   },
   "author": "Ricardo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "whatsapp-web.js": "^1.27.0"
+  }
 }
