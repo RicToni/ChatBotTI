@@ -1,0 +1,12 @@
+{
+  "name": "chatbotti",
+  "version": "1.0.0",
+  "description": "chatbot para o setor de T.I. do IFMG campus Ibirité. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    ".": "node index.js"
+  },
+  "author": "Ricardo",
+  "license": "ISC"
+}
