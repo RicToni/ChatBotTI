@@ -89,5 +89,3 @@ client.on('message', async message => {
         await message.reply(`✅ Mensagem recebida: "${texto}"\nAguarde atendimento, ${nome}.\n\nDigite "sair" para encerrar.`);
     }
 });
-
-client.initialize();
