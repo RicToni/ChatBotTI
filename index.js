@@ -80,38 +80,54 @@ client.on('message', async message => {
     }
     
     // Início da individualização dos menus de atendimento!
+    //1
     if (stateUser.get(numero) === "laboratorio"){
         
     }
-    
+    //2
     if (stateUser.get(numero) === "acessos_senhas"){
         
     }
-    
+    //3
     if (stateUser.get(numero) === "computadores"){
         
     }
-    
+    //4
     if (stateUser.get(numero) === "rede"){
 
     }
-
+    //5
     if (stateUser.get(numero) === "impressoras"){
-
+    
     }
-
+    //6
     if (stateUser.get(numero) === "ponto"){
-
+        contextUser.get(numero).maquina = "maquina de ponto";
+        await message.reply(`
+            🫱🏻‍🫲🏼 ${nome}, obrigado pelo seu reporte sobre nossa máquina de ponto, por favor, nos de mais detalhes sobre o problema enfrentado.👇🏻
+            \n
+            🔌 1 - Informar desligamento do equipamento.\n     
+            ⚠️ 2 - Máquina não está registrando o ponto.\n 
+            \n
+             Digite o número da opção ou "sair" para encerrar:
+        `)
+        return    
+    }
+    if (contextUser.get(numero).maquina === "maquina de ponto" && texto === "1"){
+        // LÓGICA 
+    } else if (contextUser.get(numero).maquina === "maquina de ponto" && texto === "2"){
+        // LÓGICA
     }
 
+    //7
     if (stateUser.get(numero) === "telefonia"){
 
     }
-
+    //8
     if (stateUser.get(numero) === "seguranca"){
 
     }
-
+    //9 
     if (stateUser.get(numero) === "outros"){
 
     }
