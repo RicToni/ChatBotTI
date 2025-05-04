@@ -72,7 +72,6 @@ client.on('message', async message => {
         return;
     }
     
-    
     const stateNow = stateUser.get(numero);
     
     switch (stateNow) {
@@ -96,7 +95,7 @@ client.on('message', async message => {
             } else {
                 await message.reply("⚠️ Escolha inválida! Digite 1 ou 2, ou 'sair'.");
             }
-            break;
+            return;
     
         case "acessos_senhas":
             // futuro fluxo para senhas
