@@ -75,7 +75,7 @@ client.on('message', async message => {
     
     const stateNow = stateUser.get(numero);
     
-    switch (stateNowl) {
+    switch (stateNow) {
         case "menu_init":
             if (opcoesMenu[texto]) {
                 stateUser.set(numero, opcoesMenu[texto]);
@@ -83,6 +83,7 @@ client.on('message', async message => {
                 return;
             } else {
                 await message.reply(`⚠️ Resposta inválida, escolha uma das opções do menu ou digite sair!! ⚠️`);    
+                return
             }
     
         case "ponto":
