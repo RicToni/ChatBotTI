@@ -17,7 +17,6 @@ const usuerActive = new Set(); // Quem está no atendimento
 const stateUser = new Map(); // Em que menu o usuário está
 const contextUser = new Map(); // Guarda o contexto de atnedimento do usuário
 
-
 // Para mapeamento dos menus
 const opcoesMenu = {
     "1": "laboratorio",
@@ -39,8 +38,10 @@ client.on('message', async message => {
     const texto = message.body.toLowerCase();
     let contexto = {};
     
-    contextUser.set(numero, contexto); 
-    
+    if (!contextUser.has(numero)){
+        contextUser.set(numero, contexto); 
+    }
+
     // Ativa o atendimento ao usuário. 
     if (!usuerActive.has(numero)) {
         usuerActive.add(numero);
@@ -71,65 +72,109 @@ client.on('message', async message => {
         return;
     }
     
-    if (opcoesMenu[texto]) {
-        stateUser.set(numero, opcoesMenu[texto]);
-        await message.reply(`✅ Você selecionou a opção: ${opcoesMenu[texto].replaceAll("_", " ")}`);
-        return;
-    } else {
-        await message.reply(`⚠️ Resposta inválida, escolha uma das opções do menu ou digite sair!! ⚠️`);    
-    }
     
+    const stateNow = stateUser.get(numero);
+    
+    switch (stateNowl) {
+        case "menu_init":
+            if (opcoesMenu[texto]) {
+                stateUser.set(numero, opcoesMenu[texto]);
+                await message.reply(`✅ Você selecionou a opção: ${opcoesMenu[texto].replaceAll("_", " ")}`);
+                return;
+            } else {
+                await message.reply(`⚠️ Resposta inválida, escolha uma das opções do menu ou digite sair!! ⚠️`);    
+            }
+    
+        case "ponto":
+            if (texto === "1") {
+                await message.reply("⚡ Obrigado! Vamos verificar o desligamento da máquina de ponto.");
+                // Você pode mudar de estado aqui se quiser
+            } else if (texto === "2") {
+                await message.reply("🛠️ Entendido! Vamos checar o registro de ponto da máquina.");
+                // Idem
+            } else {
+                await message.reply("⚠️ Escolha inválida! Digite 1 ou 2, ou 'sair'.");
+            }
+            break;
+    
+        case "acessos_senhas":
+            // futuro fluxo para senhas
+            break;
+    
+        case "computadores":
+            break
+        
+        case "redes":
+            break
+
+        case "impressora":
+        
+        case "telefonia":
+
+        case "seguranca":
+
+        case "outros":
+            
+        default:
+            await message.reply("❓ Estado desconhecido. Mande 'sair' e tente de novo.");
+    }
+
+
+
+
+
+
     // Início da individualização dos menus de atendimento!
     //1
-    if (stateUser.get(numero) === "laboratorio"){
-        
-    }
-    //2
-    if (stateUser.get(numero) === "acessos_senhas"){
-        
-    }
-    //3
-    if (stateUser.get(numero) === "computadores"){
-        
-    }
-    //4
-    if (stateUser.get(numero) === "rede"){
-
-    }
-    //5
-    if (stateUser.get(numero) === "impressoras"){
-    
-    }
-    //6
-    if (stateUser.get(numero) === "ponto"){
-        contextUser.get(numero).maquina = "maquina de ponto";
-        await message.reply(`
-            🫱🏻‍🫲🏼 ${nome}, obrigado pelo seu reporte sobre nossa máquina de ponto, por favor, nos de mais detalhes sobre o problema enfrentado.👇🏻
-            \n
-            🔌 1 - Informar desligamento do equipamento.\n     
-            ⚠️ 2 - Máquina não está registrando o ponto.\n 
-            \n
-             Digite o número da opção ou "sair" para encerrar:
-        `)
-        return    
-    }
-    if (contextUser.get(numero).maquina === "maquina de ponto" && texto === "1"){
-        // LÓGICA 
-    } else if (contextUser.get(numero).maquina === "maquina de ponto" && texto === "2"){
-        // LÓGICA
-    }
-
-    //7
-    if (stateUser.get(numero) === "telefonia"){
-
-    }
-    //8
-    if (stateUser.get(numero) === "seguranca"){
-
-    }
-    //9 
-    if (stateUser.get(numero) === "outros"){
-
-    }
-
+    //if (stateUser.get(numero) === "laboratorio"){
+    //    
+    //}
+    ////2
+    //if (stateUser.get(numero) === "acessos_senhas"){
+    //    
+    //}
+    ////3
+    //if (stateUser.get(numero) === "computadores"){
+    //    
+    //}
+    ////4
+    //if (stateUser.get(numero) === "rede"){
+//
+    //}
+    ////5
+    //if (stateUser.get(numero) === "impressoras"){
+    //
+    //}
+    ////6
+    //if (stateUser.get(numero) === "ponto"){
+    //    contextUser.get(numero).maquina = "maquina de ponto";
+    //    await message.reply(`
+    //        🫱🏻‍🫲🏼 ${nome}, obrigado pelo seu reporte sobre nossa máquina de ponto, por favor, nos de mais detalhes sobre o problema enfrentado.👇🏻
+    //        \n
+    //        🔌 1 - Informar desligamento do equipamento.\n     
+    //        ⚠️ 2 - Máquina não está registrando o ponto.\n 
+    //        \n
+    //         Digite o número da opção ou "sair" para encerrar:
+    //    `)
+    //    return    
+    //}
+    //if (contextUser.get(numero).maquina === "maquina de ponto" && texto === "1"){
+    //    // LÓGICA 
+    //} else if (contextUser.get(numero).maquina === "maquina de ponto" && texto === "2"){
+    //    // LÓGICA
+    //}
+//
+    ////7
+    //if (stateUser.get(numero) === "telefonia"){
+//
+    //}
+    ////8
+    //if (stateUser.get(numero) === "seguranca"){
+//
+    //}
+    ////9 
+    //if (stateUser.get(numero) === "outros"){
+//
+    //}
+//
     })
